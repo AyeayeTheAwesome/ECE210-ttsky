@@ -1,4 +1,4 @@
-'default_nettype none
+`default_nettype none
 
 module perc (
     input wire [7:0]    surrounding_percs,
