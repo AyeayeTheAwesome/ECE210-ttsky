@@ -10,8 +10,7 @@ from cocotb.triggers import ClockCycles
 async def test_project(dut):
     dut._log.info("Start")
 
-    # Set the clock period to 10 us (100 KHz)
-    clock = Clock(dut.clk, 10, units="us")
+    clock = Clock(dut.clk, 1, units="ns")
     cocotb.start_soon(clock.start())
 
     # Reset
@@ -19,22 +18,23 @@ async def test_project(dut):
     dut.ena.value = 1
     dut.ui_in.value = 0
     dut.uio_in.value = 0
-    dut.rst_n.value = 0
+    dut.rst_n.value = 1  #i flipped the reset lol
     await ClockCycles(dut.clk, 10)
-    dut.rst_n.value = 1
+    #dut.rst_n.value = 1   #need input values set before reset goes low
 
     dut._log.info("Test project behavior")
 
     # Set the input values you want to test
-    dut.ui_in.value = 20
-    dut.uio_in.value = 30
+    dut.ui_in.value = int(11000000, 2)  #turns binary into int
+    dut.uio_in.value = int(10000000, 2)  #9th perceptron cell set
+
+    dut.rst_n.value = 1  #set perceptron in motion
 
     # Wait for one clock cycle to see the output values
     await ClockCycles(dut.clk, 1)
 
-    # The following assersion is just an example of how to check the output values.
-    # Change it to match the actual expected output of your module:
-    assert dut.uo_out.value == 50
+    # start printing out perceptron grid
 
-    # Keep testing the module by changing the input values, waiting for
-    # one or more clock cycles, and asserting the expected output values.
+    dut._log.info("| " + bin(dut.uo_out.value)[2:3] + " | " + bin(dut.uo_out.value)[3:4] + " | " + bin(dut.uo_out.value)[4:5])
+    dut._log.info("| " + bin(dut.uo_out.value)[5:6] + " | " + bin(dut.uo_out.value)[6:7] + " | " + bin(dut.uo_out.value)[7:8])
+    dut._log.info("| " + bin(dut.uo_out.value)[8:9] + " | " + bin(dut.uo_out.value)[9:10] + " | " + bin(dut.uio_out.value)[9:10])
