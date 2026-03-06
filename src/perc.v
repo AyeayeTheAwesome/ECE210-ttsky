@@ -2,10 +2,10 @@
 
 module perc (
     input wire [7:0]    surrounding_percs,
-    input wire          init_state;
+    input wire          init_state,
     input wire          clk,
     input wire          reset_n,
-    output wire         state,
+    output reg         state
 );
 
     wire [7:0] weight1;
