@@ -25,16 +25,24 @@ async def test_project(dut):
     dut._log.info("Test project behavior")
 
     # Set the input values you want to test
-    dut.ui_in.value = int(11000000, 2)  #turns binary into int
-    dut.uio_in.value = int(10000000, 2)  #9th perceptron cell set
+    dut.ui_in.value = int("10000010", 2)  #turns binary into int
+    dut._log.info("Init value: " + str(dut.ui_in.value))
+    dut.uio_in.value = int("10000000", 2)  #9th perceptron cell set
 
-    dut.rst_n.value = 1  #set perceptron in motion
+    dut.rst_n.value = 0  #set perceptron in motion
 
-    # Wait for one clock cycle to see the output values
-    await ClockCycles(dut.clk, 1)
+    dut._log.info("| " + bin(dut.ui_in.value)[2:3] + " | " + bin(dut.ui_in.value)[3:4] + " | " + bin(dut.ui_in.value)[4:5] + " |")
+    dut._log.info("| " + bin(dut.ui_in.value)[5:6] + " | " + bin(dut.ui_in.value)[6:7] + " | " + bin(dut.ui_in.value)[7:8] + " |")
+    dut._log.info("| " + bin(dut.ui_in.value)[8:9] + " | " + bin(dut.ui_in.value)[9:10] + " | " + bin(dut.uio_in.value)[2:3] + " |")
 
-    # start printing out perceptron grid
+    for i in range(5): #loop it a bunch
+    
+        # Wait for one clock cycle to see the output values
+        await ClockCycles(dut.clk, 1)
 
-    dut._log.info("| " + bin(dut.uo_out.value)[2:3] + " | " + bin(dut.uo_out.value)[3:4] + " | " + bin(dut.uo_out.value)[4:5])
-    dut._log.info("| " + bin(dut.uo_out.value)[5:6] + " | " + bin(dut.uo_out.value)[6:7] + " | " + bin(dut.uo_out.value)[7:8])
-    dut._log.info("| " + bin(dut.uo_out.value)[8:9] + " | " + bin(dut.uo_out.value)[9:10] + " | " + bin(dut.uio_out.value)[9:10])
+        # start printing out perceptron grid
+        dut._log.info(bin(dut.uo_out.value))
+
+        dut._log.info("| " + bin(dut.uo_out.value)[2:3] + " | " + bin(dut.uo_out.value)[3:4] + " | " + bin(dut.uo_out.value)[4:5] + " |")
+        dut._log.info("| " + bin(dut.uo_out.value)[5:6] + " | " + bin(dut.uo_out.value)[6:7] + " | " + bin(dut.uo_out.value)[7:8] + " |")
+        dut._log.info("| " + bin(dut.uo_out.value)[8:9] + " | " + bin(dut.uo_out.value)[9:10] + " | " + bin(dut.uio_out.value)[9:10] + " |")
