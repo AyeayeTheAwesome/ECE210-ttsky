@@ -45,7 +45,7 @@ pinout:
 
   # Bidirectional pins
   uio[0]: "Initial state of Percepton 8"
-  uio[1]: ""
+  uio[1]: "Enable setting of init state bit"
   uio[2]: ""
   uio[3]: ""
   uio[4]: ""

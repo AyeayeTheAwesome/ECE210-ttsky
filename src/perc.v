@@ -5,6 +5,7 @@ module perc (
     input wire          init_state,
     input wire          clk,
     input wire          reset_n,
+    input wire          set_state,
     output reg         state
 );
 
@@ -21,13 +22,13 @@ module perc (
 
     //activation function and flip flop??
 
-    wire [7:0] next_state;
+    wire next_state;
 
     assign next_state = (!(sum < 4) || (sum >= 4 && sum <= 10) || !(sum > 10));
 
     always @(posedge clk) begin
 
-        if (reset_n) begin
+        if (!reset_n | set_state) begin
             state <= init_state;
         end else begin
             state <= next_state;
