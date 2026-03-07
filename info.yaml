@@ -3,7 +3,7 @@ project:
   title:        "Conways Game of Life - Perceptron Edition"      # Project title
   author:       "Ayman Ahmed Khan"      # Your name
   discord:      ""      # Your discord username, for communication and automatically assigning you a Tapeout role (optional)
-  description:  "Simulates Conways Game of Life with a 3x3 grid of hardware perceptrons"      # One line description of what your project does
+  description:  "This program emulates a 3x3 version of Conways Game of Life with perceptrons. Each perceptron reacts to the states of their neighbors with various weights and using an activation function decides to be alive or dead the next round"      # One line description of what your project does
   language:     "Verilog" # other examples include SystemVerilog, Amaranth, VHDL, etc
   clock_hz:     0       # Clock frequency in Hz (or 0 if not applicable)
 
@@ -45,7 +45,7 @@ pinout:
 
   # Bidirectional pins
   uio[0]: "Initial state of Percepton 8"
-  uio[1]: "Enable setting of init state bit"
+  uio[1]: "Enable Setting of Initial State"
   uio[2]: ""
   uio[3]: ""
   uio[4]: ""

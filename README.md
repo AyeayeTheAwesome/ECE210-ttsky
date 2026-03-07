@@ -1,42 +1,39 @@
-![](../../workflows/gds/badge.svg) ![](../../workflows/docs/badge.svg) ![](../../workflows/test/badge.svg) ![](../../workflows/fpga/badge.svg)
+These verilog files and tiny-tapeout components create a perceptron-powered version of
+Conway's Game of Life!
+(in a 3x3 grid)
 
-# Tiny Tapeout Verilog Project Template
 
-- [Read the documentation for project](docs/info.md)
+In perc.v is the actual code for each perceptron.
 
-## What is Tiny Tapeout?
+![Perceptron Logic](./images/perceptron_diagram.jpg "A diagram of the logic behind each perceptron")
 
-Tiny Tapeout is an educational project that aims to make it easier and cheaper than ever to get your digital and analog designs manufactured on a real chip.
+The perceptron takes in inputs from the surrounding perceptrons (4 orthogonal, 4 diagonal, some values are
+zeroed out for perceptrons on the edge of the grid). These inputs are multiplied by the weights inside perc.v, where orthogonal perceptrons
+have 4 times more effect on the perceptron's next state than diagonal ones. Once this weighted sum is calculated, if the weighted sum is within
+the perceptron's "goldilocks zone" (between 4 and 10 for these perceptrons), the perceptron will be 'alive' in the next state! Otherwise,
+(to simulate loneliness or overcrowding) the perceptron will be 'dead' next round. After reset is done, a bit is used to hold the perceptron's
+in an init hold state, where the initial states can be passed through the ui_in channels. After the uio_in bit goes low, the perceptrons can
+start taking in inputs and changing state, simulating a version of Conways Game of Life!
 
-To learn more and get started, visit https://tinytapeout.com.
 
-## Set up your Verilog project
+In tt_um_perc.v, all the perceptrons are individually instantiated and are wired together, the outputs of the orthogonal and 
+diagonal perceptrons feeding into the inputs of others.
+If we had a bigger ui_in stack, we could simulate larger games (4x4, 5x5, etc.)
 
-1. Add your Verilog files to the `src` folder.
-2. Edit the [info.yaml](info.yaml) and update information about your project, paying special attention to the `source_files` and `top_module` properties. If you are upgrading an existing Tiny Tapeout project, check out our [online info.yaml migration tool](https://tinytapeout.github.io/tt-yaml-upgrade-tool/).
-3. Edit [docs/info.md](docs/info.md) and add a description of your project.
-4. Adapt the testbench to your design. See [test/README.md](test/README.md) for more information.
 
-The GitHub action will automatically build the ASIC files using [LibreLane](https://www.zerotoasiccourse.com/terminology/librelane/).
+In test.py we simulate a game with inputs!
 
-## Enable GitHub actions to build the results page
+![Waveform Diagram](./images/waveform.png "Waveforms of the perceptrons showing the perceptron states over time")
 
-- [Enabling GitHub Pages](https://tinytapeout.com/faq/#my-github-action-is-failing-on-the-pages-part)
+With the inputs in ui_in (and the 0th bit of uio_in), we set the initial state of the perceptrons, and after reset
+and the init bit are done, the game begins! The for loop runs through each iteration of the game one clock cycle
+at a time, allowing easy adjustment of how long the game should go on for. Also the _log.info print statements give
+a clear visual indicator of how the game is going!
 
-## Resources
+![Print output](./images/printoutput.png "Cocotb testbench output of a run of the game!")
 
-- [FAQ](https://tinytapeout.com/faq/)
-- [Digital design lessons](https://tinytapeout.com/digital_design/)
-- [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
-- [Join the community](https://tinytapeout.com/discord)
-- [Build your design locally](https://www.tinytapeout.com/guides/local-hardening/)
 
-## What next?
-
-- [Submit your design to the next shuttle](https://app.tinytapeout.com/).
-- Edit [this README](README.md) and explain your design, how it works, and how to test it.
-- Share your project on your social network of choice:
-  - LinkedIn [#tinytapeout](https://www.linkedin.com/search/results/content/?keywords=%23tinytapeout) [@TinyTapeout](https://www.linkedin.com/company/100708654/)
-  - Mastodon [#tinytapeout](https://chaos.social/tags/tinytapeout) [@matthewvenn](https://chaos.social/@matthewvenn)
-  - X (formerly Twitter) [#tinytapeout](https://twitter.com/hashtag/tinytapeout) [@tinytapeout](https://twitter.com/tinytapeout)
-  - Bluesky [@tinytapeout.com](https://bsky.app/profile/tinytapeout.com)
+This did take a lot of debugging as this ended up being a bit (a lot) more complicated than just a single perceptron (I couldn't think
+of a use for a single perceptron so I ended up making an array of them to simulate something!). All the perceptrons having to be wired to
+other perceptrons made for quite the convoluted top module and wiring but it seems to have all worked out! Thank god I have experience with
+Verilog from past classes. But it was fun to do, it's was cool seeing it all come together! 
