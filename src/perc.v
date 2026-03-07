@@ -15,8 +15,8 @@ module perc (
 
     //weighted sum (changed to 4 so i don't have to deal with decimals)]
 
-    assign weight1 = (4 * surrounding_percs[0]) + (4 * surrounding_percs[1]) + (4 * surrounding_percs[2]) + (4 * surrounding_percs[3]);
-    assign weight2 = (surrounding_percs[4] + surrounding_percs[5] + surrounding_percs[6] + surrounding_percs[7]);
+    assign weight1 = (4 * surrounding_percs[7]) + (4 * surrounding_percs[6]) + (4 * surrounding_percs[5]) + (4 * surrounding_percs[4]);
+    assign weight2 = (surrounding_percs[0] + surrounding_percs[1] + surrounding_percs[2] + surrounding_percs[3]);
 
     assign sum = weight1 + weight2;
 
@@ -24,7 +24,7 @@ module perc (
 
     wire next_state;
 
-    assign next_state = (!(sum < 4) || (sum >= 4 && sum <= 10) || !(sum > 10));
+    assign next_state = (sum >= 4 && sum <= 10);
 
     always @(posedge clk) begin
 

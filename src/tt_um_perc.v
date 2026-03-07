@@ -19,13 +19,13 @@ module tt_um_perc (
   wire _unused = &{ena, 1'b0};
 
   perc perc0 (.surrounding_percs({uo_out[1], uo_out[3], 1'b0, 1'b0, uo_out[4], 1'b0, 1'b0, 1'b0}), .init_state(ui_in[0]), .clk(clk), .reset_n(rst_n), .state(uo_out[0]), .set_state(uio_in[1]));
-  perc perc1 (.surrounding_percs({uo_out[0], uo_out[2], uo_out[4], 1'b0, uo_out[3], uo_out[5], 1'b0, 1'b0}), .init_state(ui_in[0]), .clk(clk), .reset_n(rst_n), .state(uo_out[1]), .set_state(uio_in[1]));
-  perc perc2 (.surrounding_percs({uo_out[1], uo_out[5], 1'b0, 1'b0, uo_out[4], 1'b0, 1'b0, 1'b0}), .init_state(ui_in[0]), .clk(clk), .reset_n(rst_n), .state(uo_out[2]), .set_state(uio_in[1]));
-  perc perc3 (.surrounding_percs({uo_out[0], uo_out[4], uo_out[6], 1'b0, uo_out[1], uo_out[7], 1'b0, 1'b0}), .init_state(ui_in[0]), .clk(clk), .reset_n(rst_n), .state(uo_out[3]), .set_state(uio_in[1]));
-  perc perc4 (.surrounding_percs({uo_out[1], uo_out[3], uo_out[5], uo_out[7], uo_out[0], uo_out[3], uo_out[6], uio_out[7]}), .init_state(ui_in[0]), .clk(clk), .reset_n(rst_n), .state(uo_out[4]), .set_state(uio_in[1]));
-  perc perc5 (.surrounding_percs({uo_out[2], uo_out[4], uio_out[7], 1'b0, uo_out[1], uo_out[7], 1'b0, 1'b0}), .init_state(ui_in[0]), .clk(clk), .reset_n(rst_n), .state(uo_out[5]), .set_state(uio_in[1]));
-  perc perc6 (.surrounding_percs({uo_out[3], uo_out[7], 1'b0, 1'b0, uo_out[4], 1'b0, 1'b0, 1'b0}), .init_state(ui_in[0]), .clk(clk), .reset_n(rst_n), .state(uo_out[6]), .set_state(uio_in[1]));
-  perc perc7 (.surrounding_percs({uo_out[4], uo_out[6], uio_out[7], 1'b0, uo_out[3], uo_out[5], 1'b0, 1'b0}), .init_state(ui_in[0]), .clk(clk), .reset_n(rst_n), .state(uo_out[7]), .set_state(uio_in[1]));
+  perc perc1 (.surrounding_percs({uo_out[0], uo_out[2], uo_out[4], 1'b0, uo_out[3], uo_out[5], 1'b0, 1'b0}), .init_state(ui_in[1]), .clk(clk), .reset_n(rst_n), .state(uo_out[1]), .set_state(uio_in[1]));
+  perc perc2 (.surrounding_percs({uo_out[1], uo_out[5], 1'b0, 1'b0, uo_out[4], 1'b0, 1'b0, 1'b0}), .init_state(ui_in[2]), .clk(clk), .reset_n(rst_n), .state(uo_out[2]), .set_state(uio_in[1]));
+  perc perc3 (.surrounding_percs({uo_out[0], uo_out[4], uo_out[6], 1'b0, uo_out[1], uo_out[7], 1'b0, 1'b0}), .init_state(ui_in[3]), .clk(clk), .reset_n(rst_n), .state(uo_out[3]), .set_state(uio_in[1]));
+  perc perc4 (.surrounding_percs({uo_out[1], uo_out[3], uo_out[5], uo_out[7], uo_out[0], uo_out[3], uo_out[6], uio_out[7]}), .init_state(ui_in[4]), .clk(clk), .reset_n(rst_n), .state(uo_out[4]), .set_state(uio_in[1]));
+  perc perc5 (.surrounding_percs({uo_out[2], uo_out[4], uio_out[7], 1'b0, uo_out[1], uo_out[7], 1'b0, 1'b0}), .init_state(ui_in[5]), .clk(clk), .reset_n(rst_n), .state(uo_out[5]), .set_state(uio_in[1]));
+  perc perc6 (.surrounding_percs({uo_out[3], uo_out[7], 1'b0, 1'b0, uo_out[4], 1'b0, 1'b0, 1'b0}), .init_state(ui_in[6]), .clk(clk), .reset_n(rst_n), .state(uo_out[6]), .set_state(uio_in[1]));
+  perc perc7 (.surrounding_percs({uo_out[4], uo_out[6], uio_out[7], 1'b0, uo_out[3], uo_out[5], 1'b0, 1'b0}), .init_state(ui_in[7]), .clk(clk), .reset_n(rst_n), .state(uo_out[7]), .set_state(uio_in[1]));
   perc perc8 (.surrounding_percs({uo_out[5], uo_out[7], 1'b0, 1'b0, uo_out[4], 1'b0, 1'b0, 1'b0}), .init_state(uio_in[0]), .clk(clk), .reset_n(rst_n), .state(uio_out[7]), .set_state(uio_in[1]));
 
 
