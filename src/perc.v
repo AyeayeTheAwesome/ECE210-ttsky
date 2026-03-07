@@ -24,7 +24,7 @@ module perc (
 
     wire next_state;
 
-    assign next_state = (sum >= 4 && sum <= 10);
+    assign next_state = (sum > 4 && sum < 10);
 
     always @(posedge clk) begin
 

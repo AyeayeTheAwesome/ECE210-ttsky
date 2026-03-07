@@ -59,6 +59,6 @@ async def test_project(dut):
 
         x = format(int(dut.uo_out.value), '08b')
         y = format(int(dut.uio_out.value), '08b')
-        dut._log.info("| " + x[0:1] + " | " + x[1:2] + " | " + x[2:3] + " |")
-        dut._log.info("| " + x[3:4] + " | " + x[4:5] + " | " + x[5:6] + " |")
-        dut._log.info("| " + x[6:7] + " | " + x[7:8] + " | " + y[7] + " |")
+        dut._log.info("| " + x[7] + " | " + x[6] + " | " + x[5] + " |")
+        dut._log.info("| " + x[4] + " | " + x[3] + " | " + x[2] + " |")
+        dut._log.info("| " + x[1] + " | " + x[0] + " | " + y[0] + " |")
